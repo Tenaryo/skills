@@ -11,7 +11,6 @@ Comprehensive tmux terminal multiplexer configuration with official documentatio
 - `SKILL.md` - Main skill documentation
 - `scripts/clone_wiki.py` - Script to clone/update tmux official wiki
 - `references/document_lookup.md` - Documentation lookup guide
-- `.skill` - Skill definition file
 
 **Note:** The tmux wiki documentation can be downloaded by running:
 ```bash
@@ -24,7 +23,6 @@ Guide for creating effective skills. This skill should be used when you want to 
 **Contents:**
 - `SKILL.md` - Main skill documentation
 - `scripts/init_skill.py` - Initialize a new skill
-- `scripts/package_skill.py` - Package skill for distribution
 - `scripts/quick_validate.py` - Quick validation tool
 - `references/workflows.md` - Workflow patterns
 - `references/output-patterns.md` - Output formatting patterns
@@ -41,12 +39,13 @@ These skills are loaded by Claude automatically when available. Each skill provi
 ├── README.md               # This file
 ├── tmux-config/           # tmux configuration skill
 │   ├── SKILL.md
-│   ├── .skill
 │   ├── scripts/
+│   └── references/
+├── git-commit/             # Git workflow and commit conventions skill
+│   ├── SKILL.md
 │   └── references/
 └── skill-creator/         # Skill creation guide
     ├── SKILL.md
-    ├── .skill
     ├── scripts/
     └── references/
 ```
@@ -55,11 +54,10 @@ These skills are loaded by Claude automatically when available. Each skill provi
 
 To add a new skill:
 
-1. Use the `skill-creator` skill as a template
-2. Create your skill directory following the same structure
+1. Use `skill-creator` skill as a template
+2. Create your skill directory following to same structure
 3. Add a `SKILL.md` file with comprehensive documentation
 4. Include necessary scripts and references
-5. Create a `.skill` file for skill registration
 
 ## License
 
