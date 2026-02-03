@@ -1,0 +1,25 @@
+# Ignore documentation that can be downloaded via scripts
+tmux-config/references/tmux-wiki/
+
+# Ignore archived skill definition files
+*.skill
+
+# Ignore skill-creator's git history (it's a submodule)
+skill-creator/.git/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Common ignores
+.DS_Store
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
