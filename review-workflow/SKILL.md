@@ -46,7 +46,10 @@ description: This skill should be used when the user asks to "review C++ code", 
 根据 Phase 1 确定的审查范围，全面阅读代码库。重点关注：
 
 - 项目结构和模块组织
-- 构建系统（CMake/Makefile/Bazel 等）
+- 构建系统（CMakeLists.txt、Makefile、Bazel 等）
+- 构建配置文件（.clang-format、.clang-tidy、compile_flags.txt 等）
+- 依赖管理（vcpkg、conan、FetchContent、git submodule 等）
+- CI/CD 配置（.github/workflows、Jenkinsfile 等）
 - 依赖关系和数据流
 - 现有的编码风格和模式
 - 第三方库的使用情况
@@ -76,6 +79,7 @@ description: This skill should be used when the user asks to "review C++ code", 
 3. **安全性 (Safety)** - 内存安全、类型安全、边界检查、资源泄漏
 4. **可扩展性 (Extensibility)** - 架构灵活性、模块解耦、开放-封闭原则
 5. **代码质量 (Code Quality)** - 重复代码、函数复杂度、命名规范、注释质量
+6. **构建系统与项目配置 (Build System & Config)** - CMakeLists.txt、编译选项、依赖管理、CI/CD、代码格式化配置
 
 ### 3.2 审查产出
 
@@ -103,6 +107,12 @@ description: This skill should be used when the user asks to "review C++ code", 
 - 模块划分不合理
 - 依赖关系过重
 - 整体数据流优化
+
+**L1.5 - 构建系统层**
+- CMakeLists.txt 配置不合理
+- 编译选项缺失或过时
+- 依赖管理策略
+- CI/CD 配置优化
 
 **L2 - 接口层**
 - 函数签名可改进

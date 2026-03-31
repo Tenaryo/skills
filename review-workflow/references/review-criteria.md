@@ -9,6 +9,7 @@
 - [3. Safety (安全性)](#3-safety)
 - [4. Extensibility (可扩展性)](#4-extensibility)
 - [5. Code Quality (代码质量)](#5-code-quality)
+- [6. Build System & Config (构建系统与项目配置)](#6-build-system--config)
 
 ---
 
@@ -194,3 +195,57 @@
 - [ ] 是否使用了前向声明减少头文件依赖
 - [ ] 每个文件是否职责单一
 - [ ] 头文件包含顺序是否规范（本项目 → 第三方 → 标准库）
+
+## 6. Build System & Config
+
+### 6.1 CMakeLists.txt
+
+- [ ] CMake 最低版本是否合理（是否过于陈旧或过于激进）
+- [ ] 项目名称、版本号、语言标准是否正确设置
+- [ ] C++ 标准是否通过 `CMAKE_CXX_STANDARD` 或 `target_compile_features` 正确指定
+- [ ] 是否使用了过时的 CMake 命令（如 `aux_source_directory`、`glob` 替代手动列举源文件）
+- [ ] target-based 方式管理依赖（`target_link_libraries`、`target_include_directories`）是否替代了全局 `include_directories`/`link_libraries`
+- [ ] 是否使用了 `PUBLIC/PRIVATE/INTERFACE` 正确控制传递性
+- [ ] 编译选项是否通过 `target_compile_options` 或 generator expression 精确控制（而非全局 `add_definitions` / `CMAKE_CXX_FLAGS`）
+- [ ] 是否使用了现代 CMake 特性（如 `FetchContent` 替代 `ExternalProject_Add`）
+- [ ] find_package 是否指定了具体版本和 COMPONENTS
+- [ ] install 规则是否完善（库、头文件、CMake 配置文件）
+- [ ] 是否有不必要的硬编码路径
+- [ ] 是否正确处理了平台差异（通过 generator expression 或条件判断）
+- [ ] 测试是否通过 CTest 集成（`enable_testing()` + `add_test()`）
+- [ ] 是否有未使用的变量或冗余的 find_package
+
+### 6.2 编译选项与警告
+
+- [ ] 是否启用了合理的警告级别（`-Wall -Wextra -Wpedantic` 或 `/W4`）
+- [ ] 是否将警告视为错误（`-Werror`）— 对持续集成质量至关重要
+- [ ] 是否启用了 sanitizers（`-fsanitize=address,undefined` 用于 Debug 构建）
+- [ ] Debug/Release 构建类型是否正确区分优化级别
+- [ ] 是否启用了 LTO（Link Time Optimization）用于 Release 构建
+- [ ] 是否设置了合理的 `-march` 标志（如 `-march=native` 或目标平台架构）
+- [ ] 是否有未使用的编译选项或重复定义
+
+### 6.3 依赖管理
+
+- [ ] 第三方依赖版本是否锁定（vcpkg 的 `baseline`、conan 的 `lockfile`、FetchContent 的 `GIT_TAG`）
+- [ ] 是否有不必要的依赖（可用标准库或轻量替代品替换）
+- [ ] 依赖是否以 source 方式引入但应改为系统包或反之
+- [ ] git submodule 路径是否合理，是否有未使用的 submodule
+- [ ] 依赖许可证是否兼容项目许可证
+
+### 6.4 CI/CD 配置
+
+- [ ] 是否在多个编译器（GCC、Clang、MSVC）上测试
+- [ ] 是否在多个平台（Linux、macOS、Windows）上测试（如项目需要跨平台）
+- [ ] 是否有缓存策略（ccache、构建缓存）加速 CI
+- [ ] 是否使用了 matrix build 覆盖不同配置
+- [ ] 是否有 Release/Debug 两种构建类型的测试
+- [ ] 是否自动化了代码质量检查（clang-tidy、cppcheck、clang-format）
+- [ ] Artifacts（二进制、测试报告）是否正确归档
+
+### 6.5 代码格式化与静态分析
+
+- [ ] 是否存在 `.clang-format` 配置文件，且风格与实际代码一致
+- [ ] 是否存在 `.clang-tidy` 配置文件，检查规则是否合理
+- [ ] 是否存在 `compile_commands.json` 生成步骤（供工具链使用）
+- [ ] 格式化和静态分析是否集成到 CI 或 pre-commit hook
