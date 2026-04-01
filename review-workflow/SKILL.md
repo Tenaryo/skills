@@ -161,6 +161,7 @@ description: This skill should be used when the user asks to "review C++ code", 
 架构师，您是否批准这个修改方案？
 ```
 
+你应该使用`question`工具来询问问题。
 选项的第一个应该是推荐方案，方便架构师快速批准。如果架构师批准了，给出修改的具体代码方案（一段一段给，每一段分一个问题），你所有改动的代码都需要得到架构师的批准。
 
 ### 4.4 审批流程
