@@ -12,9 +12,9 @@ description: This skill should be used when the user asks to "review C++ code", 
 ## Workflow Overview
 
 ```
-1. 创建Worktree → 2. 探索理解 → 3. 多维度审查 → 4. 逐项汇报审批 → 5. 应用修改
-                                                              ↓
-9. 总结汇报 ← 8. 合并Worktree ← 7. 删除Worktree ← 6. 提交代码 ← 5. 应用修改
+1. 创建隔离环境 → 2. 探索理解 → 3. 多维度审查 → 4. 逐项汇报审批 → 5. 应用修改
+                                                               ↓
+8. 总结汇报 ← 7. 合并Worktree ← 6. 提交代码 ← 5. 应用修改
 ```
 
 ## Phase 1: 创建隔离环境
@@ -108,28 +108,31 @@ description: This skill should be used when the user asks to "review C++ code", 
 - 依赖关系过重
 - 整体数据流优化
 
-**L1.5 - 构建系统层**
-- CMakeLists.txt 配置不合理
-- 编译选项缺失或过时
-- 依赖管理策略
-- CI/CD 配置优化
+**L2 - 整体项目架构层**
+- CMakeLists.txt / 构建系统配置
+- 编译选项与工具链配置
+- 依赖管理策略（vcpkg、conan 等）
+- CI/CD 配置（GitHub Actions、Jenkinsfile 等）
+- 代码格式化配置（.clang-format、.clang-tidy 等）
+- README 及文档
+- 测试脚本与测试覆盖情况
 
-**L2 - 接口层**
+**L3 - 接口层**
 - 函数签名可改进
 - API 设计不合理
 - 错误处理策略
 
-**L3 - 数据结构层**
+**L4 - 数据结构层**
 - 数据结构选择不当
 - 内存布局优化
 - 类型设计改进
 
-**L4 - 算法层**
+**L5 - 算法层**
 - 算法复杂度可优化
 - 不必要的计算
 - 并发优化机会
 
-**L5 - 代码实现层**
+**L6 - 代码实现层**
 - 现代 C++ 特性替代
 - 具体代码模式改进
 - 变量命名、代码组织
@@ -204,7 +207,7 @@ description: This skill should be used when the user asks to "review C++ code", 
 
 ### 5.2 应用顺序
 
-按照 Phase 4 中批准的顺序，并行分发subagent逐个改动，在subagent工作完后逐一验证subagent的工作，如果有误亲自修改。
+按照 Phase 4 中批准的顺序，将每个批准的修改点作为一个独立任务，使用 Task 工具并行分发给 subagent 执行代码修改。每个 subagent 负责完成一个修改点的代码变更。所有 subagent 完成后，逐一验证其工作：检查改动是否符合批准的方案、是否引入了无关变更。如果 subagent 的输出有误，亲自修正。
 
 ### 5.3 验证
 
@@ -271,6 +274,3 @@ Commit message 规范：
 6. **后续建议** - 建议下一步优化方向或需要关注的技术债
 7. **文件变更摘要** - 修改的文件列表及变更概要
 
-## Additional Resources
-
-- **`references/review-criteria.md`** - 各审查维度的详细标准和检查清单

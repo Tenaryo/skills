@@ -14,9 +14,9 @@ Test-driven bug fixing workflow with isolated git worktree, root cause analysis,
 ## Workflow Overview
 
 ```
-1. 探索理解 → 2. 澄清问题 → 3. 创建Worktree → 4. 运行测试 → 5. 复现测试
+1. 探索与理解 → 2. 创建隔离环境 → 3. 测试与复现 → 4. 问题分析 → 5. 修复审批
                                                       ↓
-10. 总结汇报 ← 9. 合并Worktree ← 8. 提交修复 ← 7. 实现修复 ← 6. 修复审批
+9. 总结汇报 ← 8. 合并Worktree ← 7. 提交修复 ← 6. 实现修复
 ```
 
 ## Phase 1: 探索与理解
@@ -142,7 +142,7 @@ git commit -m "test: add reproduction test for <bug-description>"
 - 中等bug: 至少 5 个问题
 - 复杂bug: 15+ 个问题
 
-**⚠️ 关键约束：问题必须一个一个问，绝对不能一次问多个问题。每问完一个问题，必须等待架构师回答并获得批准后，才能问下一个问题。直
+**⚠️ 关键约束：问题必须一个一个问，绝对不能一次问多个问题。每问完一个问题，必须等待架构师回答并获得批准后，才能问下一个问题。直到所有问题都获得批准为止。**
 
 ### 5.2 问题层级（自上而下）
 
