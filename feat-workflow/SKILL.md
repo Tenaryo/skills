@@ -176,6 +176,7 @@ git commit -m "test: add <feature-description> test"
 **L6 - 具体代码层**
 - 所有具体改动的代码
 - 一段一段的询问，不要一起问
+- 具体代码的改动在正文输出，只有询问的问题使用question工具，类似“架构师，您是否批准xxx”
 
 ### 5.3 问题格式
 
