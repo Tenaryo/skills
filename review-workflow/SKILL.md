@@ -133,7 +133,11 @@ description: This skill should be used when the user asks to "review C++ code", 
 - 现代 C++ 特性替代
 - 具体代码模式改进
 - 变量命名、代码组织
-- 逐段呈现具体改动代码
+
+在所有决策得到批准后，你需要
+- 逐段呈现每个决策具体改动代码
+- 具体代码的改动在正文输出，只有询问的问题使用question工具，类似“架构师，您是否批准xxx”，总而言之，不要把代码都堆在question里面。
+
 
 ### 4.3 每个问题的格式
 
