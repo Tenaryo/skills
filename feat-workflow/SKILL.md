@@ -14,7 +14,7 @@ TDD-based feature development workflow with isolated git worktree and collaborat
 ## Workflow Overview
 
 ```
-1. 探索理解 → 2. 澄清意图 → 3. 创建Worktree → 4. 测试审批 → 5. 协作设计
+1. 探索理解 → 2. 创建Worktree → 3. 测试审批 → 4. 测试先行 → 5. 协作设计
                                                      ↓
 9. 总结汇报 ← 8. 合并Worktree ← 7. 提交代码 ← 6. 实现功能
 ```
