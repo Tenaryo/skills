@@ -12,8 +12,8 @@ description: This skill should be used when the user asks to "review C++ code", 
 ## Workflow Overview
 
 ```
-1. 创建隔离环境 → 2. 探索理解 → 3. 多维度审查 → 4. 逐项汇报审批 → 5. 应用修改
-                                                               ↓
+1. 创建隔离环境 → 2. 探索与理解 → 3. 多维度审查 → 4. 逐项汇报与审批
+                                                                 ↓
 8. 总结汇报 ← 7. 合并Worktree ← 6. 提交代码 ← 5. 应用修改
 ```
 
@@ -31,7 +31,7 @@ description: This skill should be used when the user asks to "review C++ code", 
 
 ### 1.2 创建 Git Worktree
 
-为防止权限问题，在项目根目录的 `.worktree/` 下创建。
+为了防止权限问题，请创建在项目根目录的 `.worktree/` 下面。
 
 命名规范：
 - 分支名: `refactor/<refactor-topic>`
@@ -137,11 +137,6 @@ description: This skill should be used when the user asks to "review C++ code", 
 - 具体代码模式改进
 - 变量命名、代码组织
 
-在所有决策得到批准后，你需要
-- 逐段呈现每个决策具体改动代码
-- 具体代码的改动在正文输出，只有询问的问题使用question工具，类似“架构师，您是否批准xxx”，总而言之，不要把代码都堆在question里面。
-
-
 ### 4.3 每个问题的格式
 
 每个问题包含：
@@ -170,8 +165,6 @@ description: This skill should be used when the user asks to "review C++ code", 
 
 **⚠️ 关键约束：上述所有上下文信息（问题定位、问题描述、修改方案、预期效果）必须放在正文输出中，question 工具中只包含简短的审批问题（如"架构师，您是否批准这个修改方案？"）。不要将大量内容堆砌在 question 工具里。**
 
-你应该使用`question`工具来询问简短的审批问题，所有上下文信息放在正文输出中。选项的第一个应该是推荐方案，方便架构师快速批准。如果架构师批准了，给出修改的具体代码方案（一段一段给，每一段分一个问题），你所有改动的代码都需要得到架构师的批准。
-
 ### 4.4 审批流程
 
 ```
@@ -191,7 +184,16 @@ description: This skill should be used when the user asks to "review C++ code", 
 "以上是本次审查发现的所有问题。架构师，您是否需要补充审查其他方面？"
 
 - 如果架构师要求补充 → 继续审查并汇报
-- 如果架构师确认完毕 → 进入 Phase 5
+- 如果架构师确认完毕 → 进入具体代码审批
+
+### 4.6 具体代码审批
+
+所有问题决策获得架构师批准后，逐段呈现具体的代码改动：
+
+- 所有具体改动的代码及其所在位置
+- 一段一段的询问，不要一起问
+- 具体代码的改动在正文输出，只有询问的问题使用 question 工具，类似"架构师，您是否批准这段代码的改动？"
+- 选项的第一个应该是推荐方案，方便架构师快速批准
 
 ## Phase 5: 应用修改
 
