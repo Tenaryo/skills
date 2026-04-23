@@ -16,6 +16,9 @@ These skills are primarily tailored for **C++ development**, leveraging modern C
 | **fix-workflow** | Bug fixing with reproduction testing, root cause analysis, and architect-collaborative fix approval |
 | **review-workflow** | Systematic C++ code review and refactoring across multiple dimensions (performance, modern style, safety, etc.) |
 | **explain-code** | Step-by-step code explanation from architecture to implementation details (Chinese) |
+| **cpp-init** | Scaffold or restructure C++ projects with canonical build system (CMake), test infrastructure, CI, and project layout |
+| **humanizer** | Remove signs of AI-generated writing from text to make it sound more natural and human-written |
+| **grill-me** | Proactively ask questions about any ambiguity, decision point, or unclear requirement during task execution |
 | **skill-creator** | Guide for creating new opencode skills |
 
 ## Key Design Principles
