@@ -23,7 +23,7 @@ TDD-based feature development workflow with isolated git worktree and collaborat
 
 ### 1.1 探索代码库
 
-Understand the current codebase structure:
+在与用户交互之前，先安静地探索代码库。对于小型项目，可以彻底阅读所有源文件；对于大型项目，应聚焦于主流程，避免逐文件全量阅读。
 
 Focus on:
 - 项目结构和模块组织
