@@ -23,14 +23,21 @@ Test-driven bug fixing workflow with isolated git worktree, root cause analysis,
 
 ### 1.1 探索代码库
 
-Understand the current codebase structure:
+在与用户交互之前，先安静地探索代码库。
 
-Focus on:
+**代码库规模判断与阅读策略**：
+
+- **小型代码库**（源文件较少、模块简单）：直接完整阅读所有源文件，确保对代码库有全面深入的理解。
+- **大型代码库**（源文件众多、模块复杂）：使用 Task 工具分发 subagent 并行阅读。将不同模块或目录分配给多个 subagent 同时探索，最后由你汇总分析结果，避免逐文件串行全量阅读导致效率低下。
+
+**Focus on**:
 - 项目结构和模块组织
 - 现有功能实现模式
 - 测试框架和测试风格
 - 依赖关系和数据流
 - 构建系统和测试脚本
+
+**如有疑问，直接 grill me**：探索过程中遇到任何不确定的地方（如模块职责不清、命名模糊、结构疑惑、构建方式不明等），立即使用 question 工具向架构师提问，不要猜测或假设。
 
 ### 1.2 澄清问题
 
