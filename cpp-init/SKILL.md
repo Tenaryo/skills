@@ -5,7 +5,7 @@ description: This skill should be used when the user asks to "initialize a C++ p
 
 # cpp-init
 
-Initialize or standardize a C++ project with a canonical structure: CMake build system, test runner, clang-format, CI pipeline, and GitHub templates.
+Initialize or standardize a C++ project with a canonical structure: CMake build system, test runner, clang-format, cmake-format, clang-tidy, pre-commit hooks, CI pipeline, and GitHub templates.
 
 ## Quick Start
 
@@ -26,7 +26,10 @@ The script handles two scenarios:
 - `src/main.cpp` — Entry point (new projects only)
 - `build.sh` — Build wrapper (Ninja + cmake)
 - `run_tests.sh` — Test runner via ctest with colored output
-- `.clang-format` — Code formatting (LLVM-based, 4-space indent, 100 columns)
+- `.clang-format` — C++ code formatting (LLVM-based, 4-space indent, 80 columns)
+- `.cmake-format.yaml` — CMake code formatting
+- `.clang-tidy` — Static analysis (bugprone, modernize, performance, readability, etc.)
+- `.pre-commit-config.yaml` — Pre-commit hooks (clang-format, cmake-format, clang-tidy)
 - `.gitignore` — Build artifacts, CMake, IDE files
 - `.gitattributes` — Line ending normalization
 - `LICENSE` — MIT License
@@ -37,9 +40,10 @@ The script handles two scenarios:
 - `tests/test_main.cpp` — Minimal test with Google Test (new projects only)
 
 ### GitHub Templates
-- `.github/workflows/ci.yml` — Build + test + format check
+- `.github/workflows/ci.yml` — Build + test + format check + clang-tidy
 - `.github/PULL_REQUEST_TEMPLATE.md`
 - `.github/ISSUE_TEMPLATE/bug_report.yml`
+- `.github/ISSUE_TEMPLATE/config.yml`
 - `.github/ISSUE_TEMPLATE/feature_request.yml`
 - `.github/ISSUE_TEMPLATE/question.yml`
 
@@ -51,6 +55,7 @@ The script handles two scenarios:
 2. The script creates the full scaffold with a hello-world `main.cpp` and a passing `test_main.cpp`
 3. Git repository is initialized automatically
 4. Run `./build.sh && ./run_tests.sh` to verify
+5. Set up pre-commit: `pip install pre-commit && pre-commit install`
 
 ### Scenario B: Existing Project Needs Structuring
 
@@ -77,6 +82,11 @@ Read `references/conventions.md` for the full specification. Key points:
 - **Google Test** — fetched via CMake FetchContent (v1.14.0), no manual install needed
 - **One test executable per `test_*.cpp` file** in `tests/`, discovered via `gtest_discover_tests`
 - **Conventional commits**: `feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `build:`, `ci:`
+- **clang-format** — LLVM-based, 4-space indent, 80 columns, regroup includes, K&R braces
+- **cmake-format** — 80 columns, dangling parens, lowercase commands, uppercase keywords
+- **clang-tidy** — bugprone + modernize + performance + readability + misc + portability
+- **Pre-commit hooks** — auto-format (clang-format, cmake-format) + static analysis (clang-tidy)
+- **Naming**: Classes PascalCase, functions snake_case, members snake_case_, constants kPascalCase
 
 ## Template Placeholders
 
@@ -98,10 +108,11 @@ Asset files use `{{PLACEHOLDER}}` syntax, replaced by the init script:
 - **`conventions.md`** — Full specification of project conventions: CMake patterns, build script behavior, test file conventions, CI pipeline, commit message format, code style rules.
 
 ### assets/
-Template files copied to the target project. All use `{{PLACEHOLDER}}` syntax for substitution:
+Template files copied to the target project. Files that contain `{{PLACEHOLDER}}` have values substituted by the init script:
 - `CMakeLists.txt` — Root CMake
 - `tests_CMakeLists.txt` — Tests subdirectory CMake (copied as `tests/CMakeLists.txt`)
 - `build.sh`, `run_tests.sh` — Shell scripts
-- `.clang-format`, `.gitignore`, `.gitattributes` — Config files
+- `.clang-format`, `.cmake-format.yaml`, `.clang-tidy`, `.pre-commit-config.yaml` — Config files
+- `.gitignore`, `.gitattributes` — Git config
 - `LICENSE` — MIT License template
 - `.github/` — CI workflow, issue/PR templates

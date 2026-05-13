@@ -9,7 +9,10 @@ project_root/
 ├── CMakeLists.txt          # Root CMake configuration
 ├── build.sh                # Build script (cmake wrapper)
 ├── run_tests.sh            # Test runner script
-├── .clang-format           # Code formatting config
+├── .clang-format           # C++ code formatting config
+├── .cmake-format.yaml      # CMake code formatting config
+├── .clang-tidy             # Static analysis config
+├── .pre-commit-config.yaml # Pre-commit hooks
 ├── .gitignore              # Git ignore rules
 ├── .gitattributes          # Git attributes (line endings)
 ├── LICENSE                 # MIT License
@@ -22,7 +25,7 @@ project_root/
 │   └── test_*.cpp          # One executable per test file
 └── .github/                # GitHub templates
     ├── workflows/
-    │   └── ci.yml          # CI: build + test + format check
+    │   └── ci.yml          # CI: build + test + format + clang-tidy
     ├── PULL_REQUEST_TEMPLATE.md
     └── ISSUE_TEMPLATE/
         ├── bug_report.yml
@@ -38,7 +41,7 @@ project_root/
 - Minimum version: 3.21
 - C++ standard: 23 (configurable)
 - Build system generator: Ninja
-- Export `compile_commands.json` for IDE/clangd support
+- Export `compile_commands.json` for IDE/clangd/clang-tidy support
 - Create an INTERFACE library (`{project}_core`) for header-only or shared compile options
 - Main executable linked against the core library
 - `ENABLE_SANITIZERS` option (OFF by default) for ASan + UBSan
@@ -95,17 +98,70 @@ TEST(ModuleTest, BasicFunctionality) {
 
 - Based on LLVM style
 - 4-space indentation, no tabs
-- 100 column limit
-- Attach braces (`K&R style`)
+- 80 column limit
+- Attach braces (K&R style)
 - Left-aligned pointers and references
 - No bin-packing of parameters/arguments
-- Sort includes case-sensitively
+- Include regrouping: C headers < C++ standard headers < project headers
+- Empty line before access modifiers (public/private/protected)
+- Operators at line start on break
+- Template declarations always break
+- Trailing comments aligned
+- Compact nested namespaces
+
+## CMake Style (.cmake-format.yaml)
+
+- 80 column limit
+- 4-space indentation
+- Dangling parentheses (`)` on its own line)
+- Lowercase commands, uppercase keywords
+- No space between function name and `(`
+- Space between control flow keywords and `(`
+- No markup comments
+
+## Static Analysis (.clang-tidy)
+
+Enabled checks:
+- `bugprone-*` (except `easily-swappable-parameters`)
+- `modernize-*` (with `use-trailing-return-type`)
+- `performance-*`
+- `readability-*` (except `magic-numbers`; with `function-cognitive-complexity`, `identifier-naming`)
+- `misc-*` (except `no-recursion`, `const-correctness`, `include-cleaner`)
+- `portability-*`
+- `cppcoreguidelines-pro-type-member-init`
+
+Naming conventions:
+- Classes/structs: PascalCase
+- Functions/methods: snake_case
+- Member variables: snake_case_ (trailing underscore)
+- Local variables: snake_case
+- Constants: kPascalCase
+- Template parameters: PascalCase
+
+Warnings are treated as errors. Header filter: `^(src|tests)/.*`
+
+## Pre-commit Hooks (.pre-commit-config.yaml)
+
+Uses the [pre-commit](https://pre-commit.com) framework. Hooks run on `git commit`:
+
+1. **clang-format** — Auto-formats staged C++ files, re-stages changes
+2. **cmake-format** — Auto-formats staged CMake files, re-stages changes
+3. **clang-tidy** — Runs static analysis on staged C++ files, rejects commit on warnings
+
+Requires `build/compile_commands.json` (run `./build.sh` first).
+
+Setup:
+```sh
+pip install pre-commit
+pre-commit install
+```
 
 ## CI Pipeline (.github/workflows/ci.yml)
 
-Two jobs:
+Three jobs:
 1. **build-and-test**: Install GCC 13 + Ninja + CMake, configure, build, run `./run_tests.sh`
-2. **format-check**: Install clang-format, check all `.cpp`/`.hpp` files in `src/` and `tests/`
+2. **format-check**: Install clang-format + cmake-format, check all files
+3. **clang-tidy**: Install clang-tidy, configure CMake, run analysis on all source files
 
 Triggers: push to main/master, pull requests to main/master.
 
