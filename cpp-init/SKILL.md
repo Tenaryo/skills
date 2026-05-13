@@ -55,7 +55,7 @@ The script handles two scenarios:
 2. The script creates the full scaffold with a hello-world `main.cpp` and a passing `test_main.cpp`
 3. Git repository is initialized automatically
 4. Run `./build.sh && ./run_tests.sh` to verify
-5. Set up pre-commit: `pip install pre-commit && pre-commit install`
+5. Pre-commit hooks are installed automatically; if pre-commit is not yet installed, run `pip install pre-commit && pre-commit install` manually
 
 ### Scenario B: Existing Project Needs Structuring
 

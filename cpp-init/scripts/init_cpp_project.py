@@ -326,6 +326,12 @@ def run(args: argparse.Namespace) -> None:
         print("\nInitializing git repository...")
         subprocess.run(["git", "init"], cwd=target_dir, check=True, capture_output=True)
 
+    try:
+        subprocess.run(["pre-commit", "install"], cwd=target_dir, check=True, capture_output=True)
+        print("pre-commit hooks installed")
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        print("skipped pre-commit install (run 'pip install pre-commit && pre-commit install' manually)")
+
     print(f"\nDone! Project '{project_name}' is ready at {target_dir}")
     print("\nNext steps:")
     print(f"  cd {target_dir}")
