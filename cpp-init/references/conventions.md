@@ -125,18 +125,10 @@ Enabled checks:
 - `bugprone-*` (except `easily-swappable-parameters`)
 - `modernize-*` (with `use-trailing-return-type`)
 - `performance-*`
-- `readability-*` (except `magic-numbers`; with `function-cognitive-complexity`, `identifier-naming`)
+- `readability-*` (except `magic-numbers`, `identifier-naming`)
 - `misc-*` (except `no-recursion`, `const-correctness`, `include-cleaner`)
 - `portability-*`
 - `cppcoreguidelines-pro-type-member-init`
-
-Naming conventions:
-- Classes/structs: PascalCase
-- Functions/methods: snake_case
-- Member variables: snake_case_ (trailing underscore)
-- Local variables: snake_case
-- Constants: kPascalCase
-- Template parameters: PascalCase
 
 Warnings are treated as errors. Header filter: `^(src|tests)/.*`
 

@@ -86,7 +86,6 @@ Read `references/conventions.md` for the full specification. Key points:
 - **cmake-format** — 80 columns, dangling parens, lowercase commands, uppercase keywords
 - **clang-tidy** — bugprone + modernize + performance + readability + misc + portability
 - **Pre-commit hooks** — auto-format (clang-format, cmake-format) + static analysis (clang-tidy)
-- **Naming**: Classes PascalCase, functions snake_case, members snake_case_, constants kPascalCase
 
 ## Template Placeholders
 
