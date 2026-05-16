@@ -34,6 +34,7 @@ The script handles two scenarios:
 - `.gitattributes` — Line ending normalization
 - `LICENSE` — MIT License
 - `README.md` — Standard project documentation
+- `AGENTS.md` — Naming conventions & build guide for AI agents
 
 ### Test Infrastructure
 - `tests/CMakeLists.txt` — Auto-discovers `test_*.cpp` files, one executable per file, linked with Google Test
@@ -86,6 +87,7 @@ Read `references/conventions.md` for the full specification. Key points:
 - **cmake-format** — 80 columns, dangling parens, lowercase commands, uppercase keywords
 - **clang-tidy** — bugprone + modernize + performance + readability + misc + portability
 - **Pre-commit hooks** — auto-format (clang-format, cmake-format) + static analysis (clang-tidy)
+- **Naming**: See `AGENTS.md` — Classes PascalCase, functions snake_case, members snake_case_, constants kPascalCase
 
 ## Template Placeholders
 
@@ -114,4 +116,5 @@ Template files copied to the target project. Files that contain `{{PLACEHOLDER}}
 - `.clang-format`, `.cmake-format.yaml`, `.clang-tidy`, `.pre-commit-config.yaml` — Config files
 - `.gitignore`, `.gitattributes` — Git config
 - `LICENSE` — MIT License template
+- `AGENTS.md` — Naming conventions for AI agents
 - `.github/` — CI workflow, issue/PR templates

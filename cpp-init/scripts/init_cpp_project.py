@@ -302,6 +302,7 @@ def run(args: argparse.Namespace) -> None:
     copy_asset_file(".gitignore", target_dir)
     copy_asset_file(".gitattributes", target_dir)
     copy_asset_file("LICENSE", target_dir)
+    copy_asset_file("AGENTS.md", target_dir)
 
     copy_asset_file("tests_CMakeLists.txt", target_dir / "tests", "CMakeLists.txt")
 

@@ -17,6 +17,7 @@ project_root/
 ├── .gitattributes          # Git attributes (line endings)
 ├── LICENSE                 # MIT License
 ├── README.md               # Project documentation
+├── AGENTS.md               # Naming conventions & build guide for AI agents
 ├── src/                    # Source files
 │   ├── main.cpp            # Entry point
 │   └── *.hpp / *.cpp       # Library and implementation files
@@ -131,6 +132,23 @@ Enabled checks:
 - `cppcoreguidelines-pro-type-member-init`
 
 Warnings are treated as errors. Header filter: `^(src|tests)/.*`
+
+## Naming Conventions (AGENTS.md)
+
+Identifier naming conventions are documented in `AGENTS.md` for AI agents to reference.
+Naming is not enforced by clang-tidy (`readability-identifier-naming` is disabled).
+
+| Category | Case | Prefix/Suffix |
+|---|---|---|
+| Classes | PascalCase | — |
+| Structs | PascalCase | — |
+| Functions | snake_case | — |
+| Methods | snake_case | — |
+| Variables | snake_case | — |
+| Local variables | snake_case | — |
+| Member variables | snake_case | trailing `_` |
+| Constants | PascalCase | prefix `k` |
+| Template parameters | PascalCase | — |
 
 ## Pre-commit Hooks (.pre-commit-config.yaml)
 
